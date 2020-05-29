@@ -390,6 +390,7 @@ class InstallImageBuilder:
             self.mbrid, 'initrd_kiwi_install',
             install_initrd=True
         )
+        self.boot_image_task.cleanup()
         Command.run(
             [
                 'mv', self.boot_image_task.initrd_filename,
@@ -433,6 +434,7 @@ class InstallImageBuilder:
             self.mbrid, 'initrd_kiwi_install',
             install_initrd=True
         )
+        self.boot_image_task.cleanup()
         Command.run(
             [
                 'mv', self.boot_image_task.initrd_filename,

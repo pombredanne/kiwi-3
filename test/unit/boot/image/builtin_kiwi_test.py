@@ -158,11 +158,11 @@ class TestBootImageKiwi:
             self.boot_image.target_dir + '/foo'
         )
 
-    @patch('kiwi.boot.image.base.Path.wipe')
+    @patch('kiwi.boot.image.builtin_kiwi.Path.wipe')
     @patch('os.path.exists')
-    def test_destructor(self, mock_path, mock_wipe):
+    def test_cleanup(self, mock_path, mock_wipe):
         mock_path.return_value = True
-        self.boot_image.__del__()
+        self.boot_image.cleanup()
         mock_wipe.assert_called_once_with('boot-root-directory')
 
     def teardown(self):

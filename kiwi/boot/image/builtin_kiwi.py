@@ -49,6 +49,7 @@ class BootImageKiwi(BootImageBase):
         root filesystem which is a separate image to create
         the initrd from
         """
+        self.temp_directories = []
         self.boot_root_directory = mkdtemp(
             prefix='kiwi_boot_root.', dir=self.target_dir
         )
@@ -180,3 +181,8 @@ class BootImageKiwi(BootImageBase):
                 ['--check=crc32', '--lzma2=dict=1MiB', '--threads=0']
             )
             self.initrd_filename = compress.compressed_filename
+
+    def cleanup(self):
+        for directory in self.temp_directories:
+            if directory and os.path.exists(directory):
+                Path.wipe(directory)
